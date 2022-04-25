@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
 )
 
 func recordEvent(lattice []Position, index int, subIndex int, recorder *EventRecorder) {
@@ -269,10 +270,11 @@ func initLattice(size int) []Position {
 	}
 
 	// initialize point in lattice
-	for y := 1 + float32(size)*0.4; y < 1+float32(size)*0.6; y++ {
-		for x := 1 + float32(size)*0.4; x < 1+float32(size)*0.6; x++ {
-			if x > y {
-				index = int((y*lsize + x) * 3)
+	initSize := size / 5
+	for y := 1 + (size-initSize)/2; y < 1+(size+initSize)/2; y++ {
+		for x := 1 + (size-initSize)/2; x < 1+(size+initSize)/2; x++ {
+			if x+y < 2+size {
+				index = (y*lsize + x) * 3
 				lattice[index] = Position{float32(x), float32(y), 0.0, Sul, [8]Event{}, [8]float64{}, 0.0}
 				lattice[index+1] = Position{float32(x) + 0.33, float32(y) + 0.33, 0.14, Tug, [8]Event{}, [8]float64{}, 0.0}
 				lattice[index+2] = Position{float32(x), float32(y), 0.28, Sul, [8]Event{}, [8]float64{}, 0.0}
@@ -281,4 +283,35 @@ func initLattice(size int) []Position {
 	}
 
 	return lattice
+}
+
+func writeToResult(lattice []Position) {
+	f, _ := os.Create("result.py")
+	defer f.Close()
+
+	f.WriteString("result=[")
+	var index int
+	for y := 1; y < size+1; y++ {
+		for x := 1; x < size+1; x++ {
+			index = (y*lsize + x) * 3
+			pos1 := lattice[index]
+			pos2 := lattice[index+1]
+			pos3 := lattice[index+2]
+			if pos1.status == Sul || pos3.status == Sul {
+				if pos1.status == Sul && pos3.status == Sul {
+					// yellow for two sulphur atoms
+					f.WriteString(fmt.Sprintf("[%v, %v, 'yellow'],\n", pos1.X+0.5*pos1.Y, 0.866*pos1.Y))
+				} else {
+					// orange for one sulphur atom
+					f.WriteString(fmt.Sprintf("[%v, %v, 'orange'],\n", pos1.X+0.5*pos1.Y, 0.866*pos1.Y))
+				}
+			}
+			if pos2.status == Tug {
+				f.WriteString(fmt.Sprintf("[%v, %v, 'blue'],\n", pos2.X+0.5*pos2.Y, 0.866*pos2.Y))
+			}
+		}
+	}
+	f.WriteString("]\n")
+	f.WriteString(fmt.Sprintf("xlim = %v\n", size+0.5*size))
+	f.WriteString(fmt.Sprintf("ylim = %v\n", 0.866*size))
 }

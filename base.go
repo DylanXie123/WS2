@@ -14,10 +14,10 @@ const (
 	SS_Bond = 0.329
 	W_Ads   = -2.0
 	S_Ads   = -1.28
-	W_EDif  = 5.81
-	S_EDif  = 3.02
-	// W_EDif  = 3.81
-	// S_EDif  = 1.02
+	W_EDif  = 5.01
+	S_EDif  = 2.22
+	// W_EDif = 3.81
+	// S_EDif = 1.02
 
 	T    = 273.15 + 900
 	k    = 1.380649e-23
@@ -26,8 +26,8 @@ const (
 	h    = 6.62607015e-34
 	v0   = 2.0 * kt / h
 
-	FluxRate = 1e-7
-	CMRatio  = 3.0
+	FluxRate = 2e-8
+	CMRatio  = 8
 )
 
 type Atom int8

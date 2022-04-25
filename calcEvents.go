@@ -111,25 +111,25 @@ func calcEvents(lattice []Position, index int) {
 		// Hole Desorption process
 		if pos.Z == 0.14 {
 			if SCount > 0 || WCount > 0 {
-				energy := float64(SCount)*WS_Bond + float64(WCount)*WW_Bond
+				energy := SNeighbours*WS_Bond + WNeighbours*WW_Bond
 				pos.events[eventIndex] = HolDes
-				pos.rates[eventIndex] = FluxRate * energy
+				pos.rates[eventIndex] = FluxRate * math.Exp(energy)
 				eventIndex++
 			}
 		}
 		if pos.Z == 0.28 {
 			if WCount > 0 || SCount > 0 {
-				energy := float64(SCount)*SS_Bond + float64(WCount)*WS_Bond
+				energy := SNeighbours*SS_Bond + WNeighbours*WS_Bond
 				pos.events[eventIndex] = HolDes
-				pos.rates[eventIndex] = FluxRate * CMRatio * energy
+				pos.rates[eventIndex] = FluxRate * CMRatio * math.Exp(energy)
 				eventIndex++
 			}
 		}
 		if pos.Z == 0.0 {
 			if WCount > 0 || SCount > 0 {
-				energy := float64(SCount)*SS_Bond + float64(WCount)*WS_Bond
+				energy := SNeighbours*SS_Bond + WNeighbours*WS_Bond
 				pos.events[eventIndex] = HolDes
-				pos.rates[eventIndex] = FluxRate * CMRatio * energy
+				pos.rates[eventIndex] = FluxRate * CMRatio * math.Exp(energy)
 				eventIndex++
 			}
 		}
