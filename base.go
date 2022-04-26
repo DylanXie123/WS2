@@ -5,7 +5,7 @@ import "fmt"
 const (
 	size  = 50
 	lsize = size + 2 // for periodicity, makes lattice larger
-	step  = 1e3
+	step  = 1e4
 )
 
 const (
@@ -14,10 +14,9 @@ const (
 	SS_Bond = 0.329
 	W_Ads   = -2.0
 	S_Ads   = -1.28
-	W_EDif  = 5.01
-	S_EDif  = 2.22
-	// W_EDif = 3.81
-	// S_EDif = 1.02
+	SDif    = 0.03
+	W_EDif  = 3.81
+	S_EDif  = 1.02
 
 	T    = 273.15 + 900
 	k    = 1.380649e-23
@@ -26,8 +25,8 @@ const (
 	h    = 6.62607015e-34
 	v0   = 2.0 * kt / h
 
-	FluxRate = 2e-8
-	CMRatio  = 8
+	FluxRate = 3e5
+	CMRatio  = 2.0
 )
 
 type Atom int8

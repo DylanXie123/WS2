@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"os/exec"
 	"time"
 )
 
 func main() {
 	start := time.Now()
-	rand.Seed(time.Now().UnixNano())
+	// rand.Seed(time.Now().UnixNano())
 
 	lattice := initLattice(size)
 	index := 0
@@ -31,7 +30,7 @@ func main() {
 			}
 		}
 
-		// fmt.Println(lattice, sumRates)
+		// fmt.Println(sumRates)
 
 		// choose an event
 		if sumRates > 0.0 {

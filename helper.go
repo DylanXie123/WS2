@@ -205,7 +205,7 @@ func calcNeighbour(lattice []Position, index int) (int, int) {
 		}
 	}
 
-	if lattice[index].status == Tug {
+	if lattice[index].Z == 0.14 {
 		if lattice[index+1].status == Sul {
 			SNeighbour++
 		}
@@ -226,29 +226,25 @@ func calcNeighbour(lattice []Position, index int) (int, int) {
 		}
 	}
 
-	if lattice[index].status == Sul {
-		WNeighbour++
-		if lattice[index].Z == 0.0 {
-			if lattice[index+1].status == Tug {
-				WNeighbour++
-			}
-			if lattice[index-3+1].status == Tug {
-				WNeighbour++
-			}
-			if lattice[index-3*lsize+1].status == Tug {
-				WNeighbour++
-			}
-		} else {
-			if lattice[index-1].status == Tug {
-				WNeighbour++
-			}
-			if lattice[index-3-1].status == Tug {
-				WNeighbour++
-			}
-			if lattice[index-3*lsize-1].status == Tug {
-				WNeighbour++
-			}
-
+	if lattice[index].Z == 0.0 {
+		if lattice[index+1].status == Tug {
+			WNeighbour++
+		}
+		if lattice[index-3+1].status == Tug {
+			WNeighbour++
+		}
+		if lattice[index-3*lsize+1].status == Tug {
+			WNeighbour++
+		}
+	} else {
+		if lattice[index-1].status == Tug {
+			WNeighbour++
+		}
+		if lattice[index-3-1].status == Tug {
+			WNeighbour++
+		}
+		if lattice[index-3*lsize-1].status == Tug {
+			WNeighbour++
 		}
 	}
 
