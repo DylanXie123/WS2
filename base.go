@@ -18,14 +18,14 @@ const (
 	W_EDif  = 3.81
 	S_EDif  = 1.02
 
-	T    = 273.15 + 900
+	T    = 273.15 + 1000
 	k    = 1.380649e-23
 	ev2j = 1.6e-19
 	kt   = k * T
 	h    = 6.62607015e-34
 	v0   = 2.0 * kt / h
 
-	FluxRate = 3e5
+	FluxRate = 1e3
 	CMRatio  = 2.0
 )
 

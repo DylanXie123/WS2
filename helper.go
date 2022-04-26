@@ -266,7 +266,7 @@ func initLattice(size int) []Position {
 	}
 
 	// initialize point in lattice
-	initSize := size / 5
+	initSize := size / 10
 	for y := 1 + (size-initSize)/2; y < 1+(size+initSize)/2; y++ {
 		for x := 1 + (size-initSize)/2; x < 1+(size+initSize)/2; x++ {
 			if x+y < 2+size {

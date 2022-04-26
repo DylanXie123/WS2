@@ -105,50 +105,23 @@ func calcEvents(lattice []Position, index int) {
 		}
 
 		// Hole Desorption process
-		if pos.Z == 0.14 {
-			if SCount > 0 {
+		if SCount > 0 || WCount > 0 {
+			if pos.Z == 0.14 {
 				pos.events[eventIndex] = HolDes
 				pos.rates[eventIndex] = FluxRate
 				eventIndex++
 			}
-		}
-		if pos.Z == 0.28 {
-			if WCount > 0 {
+			if pos.Z == 0.28 {
+				pos.events[eventIndex] = HolDes
+				pos.rates[eventIndex] = FluxRate * CMRatio
+				eventIndex++
+			}
+			if pos.Z == 0.0 {
 				pos.events[eventIndex] = HolDes
 				pos.rates[eventIndex] = FluxRate * CMRatio
 				eventIndex++
 			}
 		}
-		if pos.Z == 0.0 {
-			pos.events[eventIndex] = HolDes
-			pos.rates[eventIndex] = FluxRate * CMRatio
-			eventIndex++
-		}
-		// }
-		// if pos.Z == 0.14 {
-		// 	if SCount > 0 || WCount > 0 {
-		// 		energy := SNeighbours*WS_Bond + WNeighbours*WW_Bond
-		// 		pos.events[eventIndex] = HolDes
-		// 		pos.rates[eventIndex] = FluxRate * math.Exp(energy)
-		// 		eventIndex++
-		// 	}
-		// }
-		// if pos.Z == 0.28 {
-		// 	if WCount > 0 || SCount > 0 {
-		// 		energy := SNeighbours*SS_Bond + WNeighbours*WS_Bond
-		// 		pos.events[eventIndex] = HolDes
-		// 		pos.rates[eventIndex] = FluxRate * CMRatio * math.Exp(energy)
-		// 		eventIndex++
-		// 	}
-		// }
-		// if pos.Z == 0.0 {
-		// 	if WCount > 0 || SCount > 0 {
-		// 		energy := SNeighbours*SS_Bond + WNeighbours*WS_Bond
-		// 		pos.events[eventIndex] = HolDes
-		// 		pos.rates[eventIndex] = FluxRate * CMRatio * math.Exp(energy)
-		// 		eventIndex++
-		// 	}
-		// }
 	}
 
 	if pos.sum != 0.0 {

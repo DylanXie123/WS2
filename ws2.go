@@ -2,16 +2,18 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os/exec"
+	"sync"
 	"time"
 )
 
 func main() {
 	start := time.Now()
-	// rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UnixNano())
+	var wg sync.WaitGroup
 
 	lattice := initLattice(size)
-	index := 0
 	reactionTime := 0.0
 	recorder := EventRecorder{}
 
@@ -19,16 +21,21 @@ func main() {
 		// tabulate all possible events
 		sumRates := 0.0
 		for y := 1; y < size+1; y++ {
-			for x := 1; x < size+1; x++ {
-				index = (y*lsize + x) * 3
-				calcEvents(lattice, index)
-				calcEvents(lattice, index+1)
-				calcEvents(lattice, index+2)
-				sumRates += lattice[index].sum
-				sumRates += lattice[index+1].sum
-				sumRates += lattice[index+2].sum
-			}
+			wg.Add(1)
+			go func(y int) {
+				defer wg.Done()
+				for x := 1; x < size+1; x++ {
+					index := (y*lsize + x) * 3
+					calcEvents(lattice, index)
+					calcEvents(lattice, index+1)
+					calcEvents(lattice, index+2)
+					sumRates += lattice[index].sum
+					sumRates += lattice[index+1].sum
+					sumRates += lattice[index+2].sum
+				}
+			}(y)
 		}
+		wg.Wait()
 
 		// fmt.Println(sumRates)
 
@@ -39,6 +46,11 @@ func main() {
 			executeEvent(lattice, index, subIndex)
 			recordEvent(lattice, index, subIndex, &recorder)
 			clearEvents(lattice)
+		} else {
+			fmt.Println("------------------------")
+			fmt.Println("Stopped at ", t, " steps")
+			fmt.Println("------------------------")
+			break
 		}
 
 		if t > 0 && t%500 == 0 {
