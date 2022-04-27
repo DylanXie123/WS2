@@ -116,11 +116,11 @@ func calcEvents(lattice []Position, index int) {
 				pos.rates[eventIndex] = FluxRate * CMRatio
 				eventIndex++
 			}
-			if pos.Z == 0.0 {
-				pos.events[eventIndex] = HolDes
-				pos.rates[eventIndex] = FluxRate * CMRatio
-				eventIndex++
-			}
+		}
+		if pos.Z == 0.0 {
+			pos.events[eventIndex] = HolDes
+			pos.rates[eventIndex] = FluxRate * CMRatio
+			eventIndex++
 		}
 	}
 
