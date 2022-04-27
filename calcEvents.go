@@ -105,17 +105,15 @@ func calcEvents(lattice []Position, index int) {
 		}
 
 		// Hole Desorption process
-		if SCount > 0 || WCount > 0 {
-			if pos.Z == 0.14 {
-				pos.events[eventIndex] = HolDes
-				pos.rates[eventIndex] = FluxRate
-				eventIndex++
-			}
-			if pos.Z == 0.28 {
-				pos.events[eventIndex] = HolDes
-				pos.rates[eventIndex] = FluxRate * CMRatio
-				eventIndex++
-			}
+		if pos.Z == 0.14 {
+			pos.events[eventIndex] = HolDes
+			pos.rates[eventIndex] = FluxRate
+			eventIndex++
+		}
+		if pos.Z == 0.28 {
+			pos.events[eventIndex] = HolDes
+			pos.rates[eventIndex] = FluxRate * CMRatio
+			eventIndex++
 		}
 		if pos.Z == 0.0 {
 			pos.events[eventIndex] = HolDes

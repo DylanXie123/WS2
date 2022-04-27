@@ -175,3 +175,4 @@ dmypy.json
 cython_debug/
 
 result.py
+*.eps
