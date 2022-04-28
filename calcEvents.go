@@ -41,7 +41,7 @@ func calcEvents(lattice []Position, index int) {
 					nY := int(pos.Y) + y
 					nIndex = index + (y*lsize+x)*3
 					nPos := lattice[nIndex]
-					if nX < 1 || nY < 1 || nX > size || nY > size || nPos.status == Hol {
+					if nPos.status == Hol || nX < 1 || nY < 1 || nX > size || nY > size {
 						// out of boundary or no neighbours, not allowed to happen
 						continue
 					}
@@ -51,10 +51,10 @@ func calcEvents(lattice []Position, index int) {
 					if nSCount == 0 && nWCount == 0 {
 						energy = SDif
 					}
-					if nPos.status == Sul && nWNeighbours > 0 {
+					if nPos.status == Sul && WCount > 0 && nWCount > 0 {
 						deltaE = (nWNeighbours-WNeighbours)*WS_Bond + (nSNeighbours-SNeighbours)*SS_Bond
 						energy = math.Max(S_EDif, S_EDif+deltaE)
-					} else if nPos.status == Tug && nSNeighbours > 0 {
+					} else if nPos.status == Tug && SCount > 0 && nSCount > 0 {
 						deltaE = (nSNeighbours-SNeighbours)*WS_Bond + (nWNeighbours-WNeighbours)*WW_Bond
 						energy = math.Max(W_EDif, W_EDif+deltaE)
 					} else {

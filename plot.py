@@ -11,5 +11,5 @@ y = [float(y) for y in result[:, 1]]
 
 plt.scatter(x, y, s=50.0, c=result[:, 2])
 plt.axis([0, xlim, 0, ylim])
-plt.savefig(f'{dt.year}-{dt.month}-{dt.day}_{dt.hour}{dt.minute}.eps')
+# plt.savefig(f'./results/{dt.year}-{dt.month}-{dt.day}_{dt.hour}{dt.minute}.eps')
 plt.show()

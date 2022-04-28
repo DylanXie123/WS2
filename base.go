@@ -5,7 +5,7 @@ import "fmt"
 const (
 	size  = 50
 	lsize = size + 2 // for periodicity, makes lattice larger
-	step  = 5e8
+	step  = 10
 )
 
 const (
@@ -18,14 +18,14 @@ const (
 	W_EDif  = 3.81
 	S_EDif  = 1.02
 
-	T    = 273.15 + 1500
+	T    = 273.15 + 1000
 	k    = 1.380649e-23
 	ev2j = 1.6e-19
 	kt   = k * T
 	h    = 6.62607015e-34
 	v0   = 2.0 * kt / h
 
-	FluxRate = 1.0
+	FluxRate = 0.1
 	CMRatio  = 1.0
 )
 
