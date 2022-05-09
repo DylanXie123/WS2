@@ -45,9 +45,6 @@ func main() {
 			reactionTime += 1.0 / lattice[index].rates[subIndex]
 			executeEvent(lattice, index, subIndex)
 			recordEvent(lattice, index, subIndex, &recorder)
-			// writeToResult(lattice)
-			// fmt.Println(lattice[index].events[subIndex], lattice[index])
-			// exec.Command("python", "plot.py").Run()
 			clearEvents(lattice)
 
 		} else {

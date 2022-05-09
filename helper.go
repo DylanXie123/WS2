@@ -265,18 +265,25 @@ func initLattice(size int) []Position {
 		}
 	}
 
-	// initialize point in lattice
-	initSize := size / 10
-	for y := 1 + (size-initSize)/2; y < 1+(size+initSize)/2; y++ {
-		for x := 1 + (size-initSize)/2; x < 1+(size+initSize)/2; x++ {
-			if x+y < 2+size {
-				index = (y*lsize + x) * 3
-				lattice[index] = Position{float32(x), float32(y), 0.0, Sul, [8]Event{}, [8]float64{}, 0.0}
-				lattice[index+1] = Position{float32(x) + 0.33, float32(y) + 0.33, 0.14, Tug, [8]Event{}, [8]float64{}, 0.0}
-				lattice[index+2] = Position{float32(x), float32(y), 0.28, Sul, [8]Event{}, [8]float64{}, 0.0}
-			}
-		}
-	}
+	x := size/2 + 1
+	y := size/2 + 1
+	index = (y*lsize + x) * 3
+	lattice[index] = Position{float32(x), float32(y), 0.0, Sul, [8]Event{}, [8]float64{}, 0.0}
+	lattice[index+1] = Position{float32(x) + 0.33, float32(y) + 0.33, 0.14, Tug, [8]Event{}, [8]float64{}, 0.0}
+	lattice[index+2] = Position{float32(x), float32(y), 0.28, Sul, [8]Event{}, [8]float64{}, 0.0}
+
+	// // initialize point in lattice
+	// initSize := size / 10
+	// for y := 1 + (size-initSize)/2; y < 1+(size+initSize)/2; y++ {
+	// 	for x := 1 + (size-initSize)/2; x < 1+(size+initSize)/2; x++ {
+	// 		if x+y < 2+size {
+	// 			index = (y*lsize + x) * 3
+	// 			lattice[index] = Position{float32(x), float32(y), 0.0, Sul, [8]Event{}, [8]float64{}, 0.0}
+	// 			lattice[index+1] = Position{float32(x) + 0.33, float32(y) + 0.33, 0.14, Tug, [8]Event{}, [8]float64{}, 0.0}
+	// 			lattice[index+2] = Position{float32(x), float32(y), 0.28, Sul, [8]Event{}, [8]float64{}, 0.0}
+	// 		}
+	// 	}
+	// }
 
 	return lattice
 }

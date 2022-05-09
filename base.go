@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 const (
-	size  = 50
+	size  = 60
 	lsize = size + 2 // for periodicity, makes lattice larger
-	step  = 10
+	step  = 2e5
 )
 
 const (
@@ -14,9 +14,11 @@ const (
 	SS_Bond = 0.329
 	W_Ads   = -2.0
 	S_Ads   = -1.28
-	SDif    = 0.03
-	W_EDif  = 3.81
+	SDif    = 0.01
+	W_EDif  = 1.41
 	S_EDif  = 1.02
+	// W_EDif  = 3.81
+	// S_EDif  = 1.02
 
 	T    = 273.15 + 1000
 	k    = 1.380649e-23
@@ -25,8 +27,9 @@ const (
 	h    = 6.62607015e-34
 	v0   = 2.0 * kt / h
 
-	FluxRate = 0.1
-	CMRatio  = 1.0
+	FluxRate = 0.9
+	CMRatio  = 1.0 * 20
+	// divide large number to get fractal
 )
 
 type Atom int8
